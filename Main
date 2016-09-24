@@ -3,6 +3,7 @@
 import urllib2
 from bs4 import BeautifulSoup
 import os
+import re
 
 
 
@@ -26,13 +27,18 @@ respond=res.read()
 count=0
 soup=BeautifulSoup(respond)
 
+lst=[]
 
-
-for link in soup.find_all('img'):
+for link in soup.find_all("img"):
     address=link.get('data-original')
+    lst.append(address)
+
+s=set(lst)
+for address in s:
     if(address!=None):
         pathName="E:\\2333\\"+str(count+1)+".jpg"
         download(address,pathName)
         count=count+1
+        print "正在下载第：",count
 
 
